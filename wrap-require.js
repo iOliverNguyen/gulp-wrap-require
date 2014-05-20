@@ -4,6 +4,16 @@ var through = require('through2');
 
 var pluginName = 'wrap-require';
 
+function exec(id, s) {
+  s = '\ndefine(\'' + id + "', function(require, module, exports) {\n\n" +
+    s + '\n}); // ' + id + '\n';
+  return s;
+}
+
+function fixIdWindows(id) {
+  return id.replace(/\\/g, '/');
+}
+
 function wrap(options) {
 
   return through.obj(function(file, enc, cb) {
@@ -23,21 +33,15 @@ function wrap(options) {
       return cb();
     }
 
-    function exec(id, s) {
-      s = '\ndefine(\'' + id + "', function(require, module, exports) {\n\n" +
-        s + '\n}); // ' + id + '\n';
-      return s;
-    }
-
     var id = path.relative(file.base || file.cwd,
-      path.dirname(file.path) + '/' + path.basename(file.path, '.js'));
+      path.dirname(file.path), path.basename(file.path, '.js'));
+    id = fixIdWindows(id);
     var str = file.contents.toString();
     try {
       file.contents = new Buffer(exec(id, str));
 
     } catch (e) {
-      e.filename = file.path;
-      error(context, e);
+      this.emit('error', new gutil.PluginError(new Error('Error executing file ' + file.path + ': ' + e.toString())));
     }
 
     this.push(file);

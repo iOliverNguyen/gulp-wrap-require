@@ -1,6 +1,6 @@
 {
   "name": "gulp-wrap-require",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "Vu Nguyen <ng-vu@liti.ws>",
   "description": "Plugin for Gulp to wrap modules in CommonJs style",
   "homepage": "http://github.com/ng-vu/gulp-wrap-require",
@@ -15,9 +15,9 @@
     "type": "git",
     "url": "git://github.com/ng-vu/gulp-wrap-require.git"
   },
-  "dependencies": {},
-  "devDependencies": {
+  "dependencies": {
     "gulp-util": "^2.2.14",
     "through2": "^0.4.1"
-  }
+  },
+  "devDependencies": {}
 }
