@@ -5,12 +5,7 @@
   "description": "Plugin for Gulp to wrap modules in CommonJs style",
   "homepage": "http://github.com/ng-vu/gulp-wrap-require",
   "main": "wrap-require.js",
-  "license": [
-    {
-      "type": "MIT",
-      "url": "http://github.com/ng-vu/gulp-wrap-require/blob/master/LICENSE"
-    }
-  ],
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git://github.com/ng-vu/gulp-wrap-require.git"
