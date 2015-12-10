@@ -15,6 +15,7 @@ function fixIdWindows(id) {
 }
 
 function wrap(options) {
+  options = options || {};
 
   return through.obj(function(file, enc, cb) {
     if (file.isNull()) {
@@ -34,7 +35,7 @@ function wrap(options) {
     }
 
     var id = path.relative(file.base || file.cwd,
-      path.join(path.dirname(file.path), path.basename(file.path, '.js')));
+      path.join(path.dirname(file.path), path.basename(file.path, options.ext || '.js')));
     id = fixIdWindows(id);
     var str = file.contents.toString();
     try {
